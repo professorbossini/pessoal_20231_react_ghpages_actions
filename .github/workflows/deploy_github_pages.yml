@@ -1,0 +1,35 @@
+#nome do workflow
+name: Deploy no Github Pages
+#somente executa com push na branch main
+on:
+ push:
+   branches:
+     - main
+jobs:
+  #nome do job
+  deploy:
+    #sistema operacional
+    runs-on: ubuntu-latest
+    #step para obter o conteúdo do repositório
+    steps:
+      - name: Obtem repositorio
+        uses: actions/checkout@v3
+
+      - name: Instala o NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+      
+      - name: Instala as dependências
+        run: npm install
+
+      - name: Faz o build
+        run: npm run build
+
+      - name: Faz o deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          #token para autenticação no github
+          github_token: ${{ secrets.ACTIONS_TOKEN }}
+          publish_dir: ./build
+      
