@@ -13,11 +13,11 @@ jobs:
    #step para obter o conteúdo do repositório
    steps:
      - name: Obtem repositorio
-       uses: actions/checkout@v3
+       uses: actions/checkout@v2
 
 
      - name: Instala o NodeJS
-       uses: actions/setup-node@v3
+       uses: actions/setup-node@v2
        with:
          node-version: 14
 
